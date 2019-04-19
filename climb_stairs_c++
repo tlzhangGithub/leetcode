@@ -1,0 +1,63 @@
+//step1
+//暴力法
+//嵌套
+#include <iostream>
+using namespace std;
+int step(int,int);
+int main(){
+	int steps;
+	cout<<"input the stairs:"<<endl;
+	cin>>steps; 
+	while(steps<50){
+		int n;
+		n = step(0,steps);
+		cout<<"爬上"<<steps<<"楼梯，方法共:"<<n<<endl;
+		cout<<"input the stairs:"<<endl;
+		cin>>steps;
+	}	
+	return 0;
+}
+int step(int i,int s)
+{
+	if (i>s){
+		return 0;
+	}
+	else if(i==s){
+		return 1;
+	}
+	return step(i+1,s)+step(i+2,s);
+}
+//空间复杂度O(n) ,嵌套次数多，临时变量多
+//时间复杂度O(n^2)
+
+/*斐波那契思想 */
+//嵌套 
+#include <iostream>
+using namespace std;
+int step(int,int i=3);
+int main(){
+	int steps;
+	cout<<"input the stairs:"<<endl;
+	cin>>steps; 
+	while(steps<50){
+		int n;
+		n = step(steps);
+		cout<<"爬上"<<steps<<"楼梯，方法共:"<<n<<endl;
+		cout<<"input the stairs:"<<endl;
+		cin>>steps;
+	}	
+	return 0;
+}
+int step(int s,int i)
+{
+	int first =2;
+	int second = 1;
+	int third;
+	for (i;i<s;i++){
+		third = first + second;
+		first = third;
+		second = first;
+	}
+	return third;
+}
+//空间复杂度O(1)
