@@ -1,0 +1,67 @@
+//反转链表 迭代法、嵌套法
+//C++ 迭代法
+//list reversed
+#include <list>
+#include <iostream>
+#include <iterator>
+#include <initializer_list>
+#include <algorithm>
+using namespace std;
+int main(){
+void show_list(int);
+list<int> one ={1,2,3,4};
+list<int> two;
+// 使用STL反转迭代器  STL::reverse_iterator
+list<int>::reverse_iterator ptr1;
+for (ptr1=one.rbegin();ptr1!=one.rend();ptr1++)
+{
+	two.push_back(*ptr1);
+}
+//use STL function--for_each
+for_each(two.begin(),two.end(),show_list);
+}
+// define the function
+void show_list(int v)
+{
+	cout<<"ha";
+	cout<<v<<endl;
+}
+/*注意项：
+1、函数在main（）体外定义，必须事先声明；
+2、使用using声明或using 编译指令;
+*/
+
+//C++嵌套法
+//list reversed
+//recursion 嵌套
+#include <iostream>
+#include <iterator>
+#include <list>
+#include <initializer_list>
+#include <algorithm>
+using namespace std;
+void rev_list(list<int>::reverse_iterator,list<int>::reverse_iterator,list<int>&);
+void show_list(int);
+int main(){
+	list<int> one{1,2,3,4};
+	list<int> two;
+	rev_list(one.rbegin(),one.rend(),two);
+	for_each(two.begin(),two.end(),show_list);
+	return 0;
+} 
+void show_list(int v)
+{
+	cout<<"嘿嘿hei";
+	cout<<v<<endl;
+}
+//
+void rev_list(list<int>::reverse_iterator pointor1,list<int>::reverse_iterator pointor2,list<int>& list2)
+{
+	list2.push_back(*pointor1);
+	pointor1++;
+	if (pointor1!=pointor2)
+	{
+		rev_list(pointor1,pointor2,list2);
+	}
+	//return list2;
+}
