@@ -1,16 +1,66 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
- //以上是leetcode 自定义结构对象；
+//两数相加，链表
+//
+#include <iostream>
+using namespace std;
+void fill_arr(int*,int);
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+    };
+//
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
 };
+//
+class link_list{
+	private:
+		int nodes;
+		struct ListNode * node1;
+	public:
+		link_list(int*,int);
+		ListNode* begin();
+};
+//
+int main(){
+	int length1,length2;
+	cout<<"input the length of dynamic array,arr1:"<<endl;
+	cin >> length1;
+	cout<<"input the length of dynamic array,arr2:"<<endl;
+	cin >> length2;
+	int * arr1 = new int[length1];
+	int * arr2 = new int[length2];
+	cout<<"input these members of the 2 arrays:"<<endl;
+	cout<<"hhhhhhhhhh"<<endl;
+	fill_arr(arr1,length1);
+	fill_arr(arr2,length2);
+	//
+	link_list ll_1(arr1,length1);
+	link_list ll_2(arr2,length2);
+	Solution solver;
+	ListNode * list_final = solver.addTwoNumbers(ll_1.begin(),ll_2.begin());
+	cout << list_final->val <<endl;
+	ListNode * iter = list_final->next;
+	while (iter != NULL){
+		cout<<iter->val<<endl;
+		iter = iter->next;
+	}
+	return 0;
+	
+} 
+//
+void fill_arr(int* p_a,int L){
+		cout<<endl<<"input "<<L<<" values."<<endl;
+		for (int i =0;i<L;i++){
+		int value;
+		cout<<"the "<<i<<"th: ";
+		cin >>value;
+		p_a[i]=value;
+		//
+	}
+}
+//
 ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2){
     int sum = l1->val + l2->val;
     int position =0;
@@ -40,4 +90,20 @@ ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2){
     }
     return l3;
 }
-//有难度，可思考下链表节点（结构对象）的初始化方法
+//
+link_list::link_list(int * arr_ptr,int L){
+	nodes = L;
+	node1 = new ListNode(*arr_ptr);//此处注意修改，在类声明中定义 
+	if (L>1){
+		ListNode* next_n = node1;
+		for (int i=1;i<L;i++){
+			ListNode* t_tpr = new ListNode(arr_ptr[i]);
+			next_n->next = t_tpr;
+			next_n = t_tpr;
+		}
+	}	 
+}
+//
+ListNode* link_list::begin(){
+	return node1;
+}
