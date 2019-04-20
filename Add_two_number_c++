@@ -1,0 +1,43 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ //以上是leetcode 自定义结构对象；
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
+};
+ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2){
+    int sum = l1->val + l2->val;
+    int position =0;
+    sum = sum+position ;
+    if (sum == 10 || sum >10) {position = 1;}
+    sum %= 10;
+    ListNode* l3 = new ListNode(sum);
+    ListNode* ptr = l3;
+    ListNode* l1_c = l1->next ;
+    ListNode* l2_c = l2->next;
+    while (l1_c != NULL || l2_c != NULL){
+        int a,b;
+        (l1_c == NULL) ? a=0:a=(l1_c->val);
+        (l2_c == NULL) ? b=0:b=(l2_c->val);
+        sum = a + b +position;
+        position =0;
+        if (sum == 10 || sum >10) {position = 1;}
+        sum = sum%10 ;
+        ListNode* t_ptr = new ListNode(sum);
+        ptr->next = t_ptr;
+        ptr=t_ptr; 
+        (l1_c == NULL) ? l1_c=NULL :l1_c = l1_c->next ;
+        (l2_c == NULL) ? l2_c=NULL :l2_c = l2_c->next;        
+    }
+    if (position==1){
+        ptr->next = new ListNode(1);
+    }
+    return l3;
+}
+//有难度，可思考下链表节点（结构对象）的初始化方法
