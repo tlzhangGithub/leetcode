@@ -1,0 +1,43 @@
+//寻找两个有序数组的中位数;
+//
+#include <iostream>
+#include <set>
+#include <vector>
+//
+using namespace std;
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2);
+};
+//
+int main(){
+	class Solution solver;
+	vector<int> Nums1 {1,2,4,5};
+	vector<int> Nums2 {1,2,2,2,3,4,5};
+	double Median = solver.findMedianSortedArrays(Nums1,Nums2);
+	cout <<"the Median is:"<<Median<<endl;
+}
+//
+double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2){
+    double median;
+    multiset<int> Set;
+    Set.insert(nums1.begin(),nums1.end());
+    Set.insert(nums2.begin(),nums2.end());
+    int Size = Set.size();
+    if (Size%2 ==1){
+       set<int>::iterator medianP = Set.begin();
+        int intM = Size/2;
+        for (int i =0;i<intM;i++) medianP++;
+        median=*medianP;
+    }
+    else{
+        set<int>::iterator medianP1 = Set.begin();
+        set<int>::iterator medianP2 = Set.begin();
+        int intM = Size/2;
+        for (int i =0;i<intM-1;i++) medianP1++;
+        for (int i =0;i<intM;i++) medianP2++;
+        median=(double) (*medianP1 + *medianP2)/2;//cast type
+        
+    }
+    return median;
+}
