@@ -1,0 +1,39 @@
+//最长字串；
+//窗口法：
+#include <set>
+#include <iostream>
+#include <string>
+using namespace std; 
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s);
+};
+int main(){
+	string superstr;
+	cout<<"输入字符串"<<endl;
+	getline(cin,superstr);
+	class Solution solver;
+	int sub_length = solver.lengthOfLongestSubstring(superstr);
+	cout<<"最长字串长度："<<sub_length<<endl;
+}
+//
+int Solution::lengthOfLongestSubstring(string s){
+    int sum=1;
+    set<char> Set;
+    for (int i =0;i<s.size()-1;i++){
+        Set.clear();
+        int count=1;
+        char ch1 = s[i];
+        Set.insert(ch1);
+        for(int j=i+1;j<s.size();j++){
+            char ch = s[j];
+            if (Set.find(ch)==Set.end()){
+                Set.insert(ch);
+                count++;
+            }
+            else break;                
+        } 
+        (count>sum) ? (sum = count):sum=sum ;
+    }
+    return sum;
+}
