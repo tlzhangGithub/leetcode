@@ -1,0 +1,66 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int longestUnivaluePath(TreeNode* root);
+    int max_len(TreeNode*);
+};
+int Length = 0;
+int Solution::longestUnivaluePath(TreeNode* root){
+    int sum_len,left_len,right_len;
+    if(root==NULL) return Length;
+    if(root->left ==NULL){
+        left_len = 0;
+    }
+    else {
+        int t_len = max_len(root->left);
+        if (root->val== (root->left)->val) left_len =1+ t_len;
+        else left_len = 0;
+    }
+    if (root->right ==NULL){
+        right_len = 0;
+    }
+    else {
+        int t_len = max_len(root->right);
+        if(root->val == (root->right)->val) right_len =1+t_len;
+        else right_len = 0;   
+    }
+    sum_len = left_len + right_len;
+    if(Length<sum_len) Length=sum_len;
+    return Length;
+}
+int Solution::max_len(TreeNode* node){
+    int maxLen,sum_len,left_len ,right_len;
+    if(node->left ==NULL){
+        left_len = 0;
+    }
+    else {
+        int t_len = max_len(node->left);
+        if (node->val == (node->left)->val)
+        left_len = 1+t_len;
+        else left_len = 0;
+    }
+    //
+    if (node->right ==NULL){
+         0;
+    }
+    else {
+        int t_len = max_len(node->right);
+        if(node->val == (node->right)->val) right_len =1+t_len;
+        else right_len = 0;
+    }
+    //
+    sum_len = left_len + right_len;
+    if (sum_len>Length){
+        Length = sum_len;
+    }
+    (left_len<right_len)?maxLen=right_len:maxLen=left_len;
+    return maxLen;
+}
