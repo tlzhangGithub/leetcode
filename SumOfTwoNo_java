@@ -1,0 +1,37 @@
+//1st，Array
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] pair = new int[2];
+        for(int i =0;i<nums.length-1;i++)
+        {
+            for(int j = i+1;j<nums.length;j++)
+                if(nums[i]+nums[j]==target){
+                    pair[0]=i;
+                    pair[1]=j;
+                    return pair;
+                }                
+        }
+        return pair;
+    }
+}
+
+//2st, Map
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] results = new int[2];
+        Map<Integer,Integer> sets = new HashMap<>();
+        for(int i=0;i<nums.length;i++)
+            sets.put(nums[i],i);
+        for(int i=0;i<nums.length;i++)
+        {
+            int search = target - nums[i];
+            if(sets.containsKey(search)&&sets.get(search)!=i)
+            {
+                results = new int[]{i,sets.get(search)};
+                return results;
+            }
+             
+        }
+       return results; 
+    }
+}
