@@ -1,0 +1,23 @@
+//
+class Solution {
+    public String longestPalindrome(String s) {
+        String Lstr = new String();
+        List<Character> LArr = new ArrayList<>();
+        for(int i = 0; i<s.length();i++)
+        {
+            List<Character> tArr = new ArrayList<>();
+            tArr.add(s.charAt(i));
+            Set<Character> tset = new HashSet<>();
+            tset.add(s.charAt(i));
+            int j = i+1;
+            while(s.charAt(j) != s.charAt(i))
+            {
+                tArr.add(s.charAt(j));
+            }
+            tArr.add(s.charAt(j));
+            LArr = (tArr.size()>LArr.size()) ? tArr : LArr ;
+        }
+        Lstr = LArr.toString();
+        return Lstr;
+    }
+}
