@@ -1,4 +1,4 @@
-//最长字串；
+//最长回文子串；
 //窗口法：
 #include <set>
 #include <iostream>
