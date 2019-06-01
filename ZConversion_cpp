@@ -1,0 +1,22 @@
+//
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(s.length()==0) return string();
+        if(numRows==1) return s;
+        string alphabet;
+        int F = 2*(numRows-1);
+        for(int i =0; i<numRows; i++)
+        {
+            int j =0;
+            while(j*F+i<s.length())
+            {
+                alphabet += s[j*F+i];
+                if(i != 0 && i != numRows-1 && (j+1)*F-i<s.length())
+                    alphabet += s[(j+1)*F-i];
+                j++;
+            }
+        }
+        return alphabet;
+    }
+};
